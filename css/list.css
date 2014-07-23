@@ -2,15 +2,43 @@
     margin: 0px;
     padding: 0px;
 }
-#overlay{
+.container {
     position: absolute;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+#overlay{
+    margin: 0px;
+    position: fixed;
     width: 100%;
     height: 100%;
     background-color: black;
     opacity: 0.2;
+    z-index: 1;
 }
 #list-div{
-    margin-top: 40px;
+    position: relative;
+    overflow: visible;
     padding: 20px;
-    text-align: center;
+    background-color: white;
+    margin-top: 40px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 5px;
+    z-index: 2;
+}
+.list-textarea{
+    width: 325px;
+    height: 47px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+.list-hr{
+    color: black;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
