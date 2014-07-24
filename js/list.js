@@ -6,4 +6,11 @@ function centering(){
     window.onresize=centering;
 };
 
+function add(){
+    var item = document.getElementById("list-input");
+    var item_value = item.value;
+    console.log(item_value);
+    item.value = "";
+};
+
 window.onload=centering;

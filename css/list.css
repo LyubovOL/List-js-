@@ -29,8 +29,8 @@
     border-radius: 5px;
     z-index: 2;
 }
-.list-textarea{
-    width: 325px;
+.list-input{
+    width: 320px;
     height: 47px;
     border-style: solid;
     border-color: black;
@@ -41,4 +41,9 @@
     color: black;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+.list-image{
+    vertical-align: middle;
+    float: right;
+
 }
