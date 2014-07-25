@@ -1,3 +1,5 @@
+var arrayTasks = [];
+
 function centering(){
     var width=document.documentElement.clientWidth;
     var list_div=document.getElementById("list-div");
@@ -6,66 +8,52 @@ function centering(){
     window.onresize=centering;
 };
 
-var array = [];
-
 function add(){
     var item = document.getElementById("list-input");
     var item_value = item.value;
-    if (item_value !== ""){
+    if (item_value.trim() != ""){
         item.value = "";
-//        makeDivs("parent-task", item_value);
         addingToArray(item_value);
     }
 };
 
-function makeDiv(parentId, value, index) {
-    var div = document.createElement("div");
-    div.className="task-div";
-    div.style.color = "#000000";
-    div.id = index + "";
-    document.getElementById(parentId).onclick = function(e){
+function rendering() {
+    var externDiv = document.createElement("div");
+    externDiv.id="parent-task";
+    externDiv.onclick = function(e){
         e = e || window.event;
         var target = e.target || e.srcElement;
-
-        // без цикла, т.к. мы точно знаем, что внутри нет тегов
-        if (target.className != "list-image") return;
-
-        target.parentNode.style.display = 'none';
-
+        if (target.className != "list-image-delete"){
+            return;
+        }
         removeElement(target.parentNode.id);
     }
-    document.getElementById(parentId).appendChild(div);
-    makeXmpWithImage(div.id, value);
-}
-
-function makeXmpWithImage(parentId, value) {
-    var xmp = document.createElement("xmp");
-    xmp.className="task-content";
-    xmp.innerHTML = parseInt(parentId) + 1 + ". " + value;
-    document.getElementById(parentId).appendChild(xmp);
-    var close = document.createElement("img");
-    close.className = "list-image";
-    close.src="images/Sys_Error.png"
-    //close.onclick = removeElement(parentId);
-    document.getElementById(parentId).appendChild(close);
+    for(var i in arrayTasks) {
+        var taskDiv = document.createElement("div");
+        taskDiv.className="task-div";
+        var p = document.createElement("p");
+        p.className="task-content";
+        p.textContent = parseInt(i) + 1 + ". " + arrayTasks[i];
+        taskDiv.appendChild(p);
+        var del = document.createElement("img");
+        del.className = "list-image-delete";
+        del.src="images/Sys_Error.png";
+        taskDiv.appendChild(del);
+        externDiv.appendChild(taskDiv);
+    }
+    var oldTasks = document.getElementById("parent-task");
+    var listDiv = document.getElementById("list-div");
+    listDiv.replaceChild(externDiv, oldTasks);
 }
 
 function addingToArray(element) {
-    array.push(element);
-    printArray();
-}
-
-function printArray(){
-    document.getElementById("parent-task").innerHTML = "";
-    for(var i in array){
-        makeDiv("parent-task", array[i], i);
-    }
+    arrayTasks.push(element);
+    rendering();
 }
 
 function removeElement(id){
-
-    array.splice(id, 1);
-    printArray();
+    arrayTasks.splice(id, 1);
+    rendering()
 }
 
 window.onload=centering;

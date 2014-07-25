@@ -1,6 +1,7 @@
 *{
     margin: 0px;
     padding: 0px;
+    font-size: 18px;
 }
 .container {
     position: absolute;
@@ -20,7 +21,7 @@
 }
 #list-div{
     position: relative;
-    overflow: visible;
+    overflow-y: visible;
     padding: 20px;
     background-color: white;
     margin-top: 40px;
@@ -37,7 +38,7 @@
     border-radius: 5px;
     overflow: auto;
     text-overflow: clip;
-    /*margin-right: 20px;*/
+    resize: none;
 }
 .list-hr{
     color: black;
@@ -52,9 +53,10 @@
 .task-div{
     height: 47px;
     margin-top: 4px;
+    position: inherit;
 }
 .task-content{
-    position: fixed;
+    position: inherit;
     width: 320px;
     height: 46px;
     border-style: solid;
@@ -63,4 +65,9 @@
     border-radius: 5px;
     overflow: auto;
     text-overflow: clip;
+}
+.list-image-delete{
+    vertical-align: middle;
+    float: right;
+    margin-top: -47px;
 }
