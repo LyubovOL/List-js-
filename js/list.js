@@ -1,6 +1,7 @@
 var arrayTasks = [];
 
-function centering(){
+function centering()
+{
     var width=document.documentElement.clientWidth;
     var list_div=document.getElementById("list-div");
     var list_div_width=parseInt(list_div.style.width);
@@ -8,27 +9,33 @@ function centering(){
     window.onresize=centering;
 };
 
-function add(){
+function add()
+{
     var item = document.getElementById("list-input");
     var item_value = item.value;
-    if (item_value.trim() != ""){
+    if (item_value.trim() != "")
+    {
         item.value = "";
         addingToArray(item_value);
     }
 };
 
-function rendering() {
+function rendering()
+{
     var externDiv = document.createElement("div");
     externDiv.id="parent-task";
-    externDiv.onclick = function(e){
+    externDiv.onclick = function(e)
+    {
         e = e || window.event;
         var target = e.target || e.srcElement;
-        if (target.className != "list-image-delete"){
+        if (target.className != "list-image-delete")
+        {
             return;
         }
         removeElement(target.parentNode.id);
     }
-    for(var i in arrayTasks) {
+    for(var i in arrayTasks)
+    {
         var taskDiv = document.createElement("div");
         taskDiv.className="task-div";
         var p = document.createElement("p");
@@ -46,12 +53,14 @@ function rendering() {
     listDiv.replaceChild(externDiv, oldTasks);
 }
 
-function addingToArray(element) {
+function addingToArray(element)
+{
     arrayTasks.push(element);
     rendering();
 }
 
-function removeElement(id){
+function removeElement(id)
+{
     arrayTasks.splice(id, 1);
     rendering()
 }
