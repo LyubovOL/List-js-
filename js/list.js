@@ -1,29 +1,34 @@
+/** @file
+ list.js
+ * @brief
+ Adding and deleting tasks from an array
+ *
+ *
+ Detailed_multiline_file_description
+ */
+/*
+ * $Id$
+ *
+ * <:COPYRIGHT_LICENSE:>
+ */
+
 var arrayTasks = [];
 
-function centering()
-{
-    var width=document.documentElement.clientWidth;
-    var list_div=document.getElementById("list-div");
-    var list_div_width=parseInt(list_div.style.width);
-    document.getElementById("list-div").style.left=(width-list_div_width)/2+"px";
-    window.onresize=centering;
-};
-
-function add()
+function addElement()
 {
     var item = document.getElementById("list-input");
     var item_value = item.value;
     if (item_value.trim() != "")
     {
         item.value = "";
-        addingToArray(item_value);
+        addToArray(item_value);
     }
 };
 
 function rendering()
 {
     var externDiv = document.createElement("div");
-    externDiv.id="parent-task";
+    externDiv.id = "parent-task";
     externDiv.onclick = function(e)
     {
         e = e || window.event;
@@ -37,14 +42,15 @@ function rendering()
     for(var i in arrayTasks)
     {
         var taskDiv = document.createElement("div");
-        taskDiv.className="task-div";
-        var p = document.createElement("p");
-        p.className="task-content";
+		taskDiv.id = i;
+        taskDiv.className = "task-div";
+        var p = document.createElement("xmp");
+        p.className = "task-content";
         p.textContent = parseInt(i) + 1 + ". " + arrayTasks[i];
         taskDiv.appendChild(p);
         var del = document.createElement("img");
         del.className = "list-image-delete";
-        del.src="images/Sys_Error.png";
+        del.src = "images/Sys_Error.png";
         taskDiv.appendChild(del);
         externDiv.appendChild(taskDiv);
     }
@@ -53,7 +59,7 @@ function rendering()
     listDiv.replaceChild(externDiv, oldTasks);
 }
 
-function addingToArray(element)
+function addToArray(element)
 {
     arrayTasks.push(element);
     rendering();
@@ -65,4 +71,6 @@ function removeElement(id)
     rendering()
 }
 
-window.onload=centering;
+window.onload=function(){
+	document.getElementById("list-add").onclick = addElement;
+}
