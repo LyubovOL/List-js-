@@ -24,6 +24,7 @@ function addElement()
 {
     var item = document.getElementById('list-input');
     var itemValue = item.value;
+
     if (itemValue.trim() !== '')
     {
         item.value = '';
@@ -46,28 +47,37 @@ function rendering()
     {
         e = e || window.event;
         var target = e.target || e.srcElement;
+
         if (target.className != 'list-image-delete')
         {
             return;
         }
+
         removeElement(target.parentNode.id);
     };
+
     for (var i in arrayTasks)
     {
-        var taskDiv = document.createElement('div');
-        taskDiv.id = i;
-        taskDiv.className = 'task-div';
-        var p = document.createElement('xmp');
-        p.className = 'task-content';
-        p.textContent = parseInt(i) + 1 + '. ' + arrayTasks[i];
-        taskDiv.appendChild(p);
-        var del = document.createElement('img');
-        del.className = 'list-image-delete';
-        del.src = 'images/Sys_Error.png';
-        taskDiv.appendChild(del);
-        externDiv.appendChild(taskDiv);
+        createTaskView(externDiv, i);
     }
+
     var oldTasks = document.getElementById('parent-task');
     var listDiv = document.getElementById('list-div');
     listDiv.replaceChild(externDiv, oldTasks);
+}
+
+function createTaskView(div, element)
+{
+    var taskDiv = document.createElement('div');
+    taskDiv.id = element;
+    taskDiv.className = 'task-div';
+    var p = document.createElement('xmp');
+    p.className = 'task-content';
+    p.textContent = parseInt(element) + 1 + '. ' + arrayTasks[element];
+    taskDiv.appendChild(p);
+    var del = document.createElement('img');
+    del.className = 'list-image-delete';
+    del.src = 'images/Sys_Error.png';
+    taskDiv.appendChild(del);
+    div.appendChild(taskDiv);
 }
